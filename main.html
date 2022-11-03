@@ -1,38 +1,59 @@
 <!-- 운동 자세 인식을 통한 미로 게임 화면 입니다. -->
-
-<div>Teachable Machine Pose Model</div>
-<div><canvas id="canvas"></canvas></div>
-<div id="label-container"></div>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
-<script src="teachable.js"></script>
-
+<div id="teachable">
+  <div>Teachable Machine Pose Model</div>
+  <div><canvas id="canvas"></canvas></div>
+  <div id="label-container"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+  <script src="teachable.js"></script>
+</div>
 
 
 
 
 <!-- 미로 구현 -->
-<link rel="stylesheet" type="text/css" href="mazing.css">
-<div id="maze_container"><!-- --></div>
-<script src="maze-builder.js"></script>
-<script src="fancy-maze-builder.js"></script>
-<script src="mazing.js"></script>
-<script>
+<div id="maze_section">
+  <link rel="stylesheet" type="text/css" href="mazing.css">
+  <div id="maze_container"><!-- --></div>
+  <script src="maze-builder.js"></script>
+  <script src="fancy-maze-builder.js"></script>
+  <script src="mazing.js"></script>
+  <script>
 
-    var Maze, MazeGame;
+      var Maze, MazeGame;
 
-  const makeMaze = (id, width, height, speech = false) => {
-    Maze = new FancyMazeBuilder(width, height);
-    Maze.display(id);
-    MazeGame = new Mazing("maze");
-    //console.log(MazeGame);
-    //if(speech) {
-    //  MazeGame.enableSpeech();
-    //}
+    const makeMaze = (id, width, height, speech = false) => {
+      Maze = new MazeBuilder(width, height);
+      Maze.placeKey();
+
+      Maze.display(id);
+      MazeGame = new Mazing("maze");
+      //console.log(MazeGame);
+      //if(speech) {
+      //  MazeGame.enableSpeech();
+      //}
+    }
+  
+  
+    makeMaze("maze_container",8, 8);
+
+
+  </script>
+</div>
+<style>
+  #teachable {
+      float: left;
+      width: flex;
   }
- 
- 
-  makeMaze("maze_container",8, 8);
+  #maze_section {
+      float: right;
+      width: flex;
+  }
+  div.box {
 
-
-</script>
+    height: 100px;
+  
+    width: 100px;
+  }
+  
+</style>

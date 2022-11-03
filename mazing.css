@@ -11,18 +11,21 @@
   #maze div {
     display: flex;
   }
+
+  /* 여기 수정하면 공간이 늘어남 */
   #maze div div {
     position: relative;
-    width: 1em;
-    height: 1em;
+    width: 2em;
+    height: 2em;
   }
+  /* 아이콘 사이즈 변경 */
   #maze div div::after {
     position: absolute;
     left: -3px;
     top: -4px;
     text-align: center;
     text-shadow: 0 0 1px black;
-    font-size: 1.2em;
+    font-size: 2.2em;
     z-index: 10;
   }
   #maze div div.door.exit::after {
@@ -51,6 +54,7 @@
   #maze.face-right div.hero::after {
     transform: scale(-1, 1);
   }
+  /* 벽돌 색깔 바꾸기 */
   #maze div div.wall, #maze div div.nubbin.wall, #maze div div.door.exit {
     background-color: #454545;
     background-image: linear-gradient(45deg, rgba(0,0,0,0.2) 45%, transparent 55%), linear-gradient(to bottom, rgba(0,0,0,0.2) 45%, transparent 55%);
@@ -71,12 +75,12 @@
   #maze div div.key::after {
     content: "\1F511";
   }
-  
+  /* 블럭 사이즈 조절 */
   #maze div div:nth-child(odd) {
-    width: 1em;
+    width: 2em;
   }
   #maze div:nth-child(odd) div {
-    height: 1em;
+    height: 2em;
   }
   
   #maze.finished::after {

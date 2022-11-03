@@ -57,10 +57,11 @@ function Position(x, y) {
 
    
 
-    //activate control keys
-    // this.keyPressHandler = this.mazeKeyPressHandler.bind(this);
-    // console.log(this.keyPressHandler);
-    // document.addEventListener("keydown", this.keyPressHandler, false);
+   // activate control keys
+   //디버깅을 위해 키보드로도 움직일수 있게 함
+    this.keyPressHandler = this.mazeKeyPressHandler.bind(this);
+    //console.log(this.keyPressHandler);
+    document.addEventListener("keydown", this.keyPressHandler, false);
  
  
     //   function delay(milliseconds){
@@ -176,9 +177,10 @@ function Position(x, y) {
       }
     }
   };
-  
-  // Mazing.prototype.mazeKeyPressHandler = function() {
-  //   var tryPos = new Position(this.heroPos.x, this.heroPos.y);
+     
+  //디버깅을 위해 키보드로도 움직일수 있게 함
+  Mazing.prototype.mazeKeyPressHandler = function(e) {
+    var tryPos = new Position(this.heroPos.x, this.heroPos.y);
   //   console.log(result[result.length-1]);
   //   switch(result[result.length-1])
   //   {
@@ -206,33 +208,33 @@ function Position(x, y) {
   //   }
 
 
-    // switch(e.keyCode)
-    // {
-    //   case 37: // left
-    //     this.mazeContainer.classList.remove("face-right");
-    //     tryPos.y--;
-    //     break;
+    switch(e.keyCode)
+    {
+      case 37: // left
+        this.mazeContainer.classList.remove("face-right");
+        tryPos.y--;
+        break;
   
-    //   case 38: // up
-    //     tryPos.x--;
-    //     break;
+      case 38: // up
+        tryPos.x--;
+        break;
   
-    //   case 39: // right
-    //     this.mazeContainer.classList.add("face-right");
-    //     tryPos.y++;
-    //     break;
+      case 39: // right
+        this.mazeContainer.classList.add("face-right");
+        tryPos.y++;
+        break;
   
-    //   case 40: // down
-    //     tryPos.x++;
-    //     break;
+      case 40: // down
+        tryPos.x++;
+        break;
   
-    //   default:
-    //     return;
+      default:
+        return;
   
-    // }
-    // this.tryMoveHero(tryPos);
-    //e.preventDefault();
-  // };
+    }
+    this.tryMoveHero(tryPos);
+    e.preventDefault();
+  };
   
   Mazing.prototype.setChildMode = function() {
     this.childMode = true;

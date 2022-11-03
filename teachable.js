@@ -2,9 +2,14 @@
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
 
     // the link to your model provided by Teachable Machine export panel
+
+
     const URL = "./my_model_pose/";
+    const samePoseCount = 5; //같은 포즈가 몇번이상 나오면 포즈가 바뀐것으로 간주할지 결정하는 변수
+    const posePredictPecent = 0.7; //포즈 확률이 몇퍼센트 이상이면 해당 포즈로 간주할지 결정하는 변수
+
     let model, webcam, ctx, labelContainer, maxPredictions;
-    let result=[];
+    let poseList=[]; //posePredictPecent 이상의 확률을 가진 포즈만 poseList에 저장
     let state_pose = 'None';
     let count=0;
     let before_pose = 'None';
@@ -31,7 +36,7 @@
         webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
         await webcam.play();
-        window.requestAnimationFrame(loop);
+        window.requestAnimationFrame(loop); //1초에 60번씩 실행
 
         // append/get elements to the DOM
         const canvas = document.getElementById("canvas");
@@ -44,44 +49,46 @@
     }
 
     async function loop(timestamp) {
+
         webcam.update(); // update the webcam frame
-        await predict();
+        await predict();       
         window.requestAnimationFrame(loop);
+        
+
     }
+
+    // delay 함수 (일단은 사용하지 않음)
     function delay(milliseconds){
         return new Promise(resolve => {
             setTimeout(resolve, milliseconds);
         });
     }
 
-    //포즈 모델의 결과값들을 통해 같은값이 5번이상 나오면 state_pose에 저장
+    //포즈 모델의 결과값들을 통해 같은값이 samePoseCount번이상 나오면 state_pose에 저장
     async function pose_state(){
-        
 
         //console.log("happy");
         //console.log('count : '+count);
-        before_pose=result[result.length-1];
-
-
-        if(count==5){
-            state_pose=result[result.length-1];
+        before_pose=poseList[poseList.length-1];
+        if(count==samePoseCount){
+            state_pose=poseList[poseList.length-1];
             console.log("state_pose : "+state_pose);
             count=0;
-            result=[];
-            get_direction();
+            poseList=[];
+            poseChanged();
             //var link = 'maze.html';
             //location.replace(link);
         
         }
-        if (result[result.length-1] == before_pose){
+        if (poseList[poseList.length-1] == before_pose){
             count++;
         }
         else{
             count=0;
         }
     }
-
-    async function get_direction(){
+    //스탠드 -> 포즈 -> 스탠드가 되면 포즈가 바뀐것으로 간주
+    async function poseChanged(){
 
         if (state_pose=='stand' && !if_first_stand){
             if_first_stand=true;
@@ -90,7 +97,7 @@
             my_pose=state_pose;
         }
         else if(state_pose=='stand'){
-            change_direction();
+            moveCharacterByPose();
             if_first_stand=false;
             my_pose='None';
         }
@@ -98,8 +105,8 @@
         
         
     } 
-
-    async function change_direction(){
+    //포즈에 따라 캐릭터 조작 명령 함수 실행시키기
+    async function moveCharacterByPose(){
         if(my_pose=='squat'){
             MazeGame.moveCharacter("down");
             console.log("down");
@@ -118,26 +125,28 @@
         }
     }
 
+
     async function predict() {
         // Prediction #1: run input through posenet
         // estimatePose can take in an image, video or canvas html element
         const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
         // Prediction 2: run input through teachable machine classification model
         const prediction = await model.predict(posenetOutput);
-        await delay(100);
+        //await delay(100);
 
 
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-                if (prediction[i].probability.toFixed(2) > 0.7) {
-                    result.push(prediction[i].className);
+                //posePredictPecent 이상의 확률을 가진 포즈만 poseList에 저장
+                if (prediction[i].probability.toFixed(2) > posePredictPecent) {
+                    poseList.push(prediction[i].className);
                     pose_state();
                     //if (state_pose=="stand")
                 }
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
-        //console.log(result);
+        //console.log(poseList);
 
 
 
