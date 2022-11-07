@@ -1,0 +1,31 @@
+#container{
+    display: flex;
+    flex-direction: column;
+  }
+  header{
+      border-bottom:1px solid gray;
+      padding-left:20px;
+  }
+  footer{
+      border-top:1px solid gray;
+      padding:20px;
+      text-align: center;
+  }
+  #content{
+      display:flex;
+      align-items: center;
+  }
+  #teachable{
+      border:1px solid gray;
+
+      padding: 20px;
+      flex-grow: 1;
+
+  }
+  #maze_section{
+
+      border:1px solid gray;
+      padding: 20px;
+      flex-grow: 2;
+
+  }

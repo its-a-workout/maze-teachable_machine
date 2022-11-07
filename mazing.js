@@ -181,33 +181,6 @@ function Position(x, y) {
   //디버깅을 위해 키보드로도 움직일수 있게 함
   Mazing.prototype.mazeKeyPressHandler = function(e) {
     var tryPos = new Position(this.heroPos.x, this.heroPos.y);
-  //   console.log(result[result.length-1]);
-  //   switch(result[result.length-1])
-  //   {
-  //     case 'left': // left
-  //       this.mazeContainer.classList.remove("face-right");
-  //       tryPos.y--;
-  //       break;
-  
-  //     case 'up': // up
-  //       tryPos.x--;
-  //       break;
-  
-  //     case 'right': // right
-  //       this.mazeContainer.classList.add("face-right");
-  //       tryPos.y++;
-  //       break;
-  
-  //     case 'down': // down
-  //       tryPos.x++;
-  //       break;
-  
-  //     default:
-  //       return;
-  
-  //   }
-
-
     switch(e.keyCode)
     {
       case 37: // left

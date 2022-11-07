@@ -15,8 +15,9 @@
   /* 여기 수정하면 공간이 늘어남 */
   #maze div div {
     position: relative;
-    width: 2em;
-    height: 2em;
+    /* flex-grow: 1; */
+      width: 2rem;
+      height: 2rem;
   }
   /* 아이콘 사이즈 변경 */
   #maze div div::after {
@@ -25,7 +26,7 @@
     top: -4px;
     text-align: center;
     text-shadow: 0 0 1px black;
-    font-size: 2.2em;
+    font-size: 2.4em;
     z-index: 10;
   }
   #maze div div.door.exit::after {
@@ -77,10 +78,14 @@
   }
   /* 블럭 사이즈 조절 */
   #maze div div:nth-child(odd) {
-    width: 2em;
+    /* flex-grow: 1; */
+
+    width: 2rem;
   }
   #maze div:nth-child(odd) div {
-    height: 2em;
+    /* flex-grow: 1; */
+
+    height: 2rem;
   }
   
   #maze.finished::after {
