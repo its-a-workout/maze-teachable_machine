@@ -93,29 +93,34 @@
 
 
     async function tutorial(){
-        if(tutorial_state[tutorial_state_num]=='stand'){
-            whatTodo.innerHTML = "What to do: stand";
-        }
-        else if(tutorial_state[tutorial_state_num]=='squat'){
-            whatTodo.innerHTML = "What to do: squat";
+        // if(tutorial_state[tutorial_state_num]=='stand'){
+        //     whatTodo.innerHTML = "What to do: stand";
+        // }
+        // else if(tutorial_state[tutorial_state_num]=='squat'){
+        //     whatTodo.innerHTML = "What to do: squat";
 
-        }
-        else if(tutorial_state[tutorial_state_num]=='jump with arms'){
-            whatTodo.innerHTML = "What to do: jump with arms";
+        // }
+        // else if(tutorial_state[tutorial_state_num]=='jump with arms'){
+        //     whatTodo.innerHTML = "What to do: jump with arms";
 
-        }
-        else if(tutorial_state[tutorial_state_num]=='left side exercise'){
-            whatTodo.innerHTML = "What to do: left side exercise";
+        // }
+        // else if(tutorial_state[tutorial_state_num]=='left side exercise'){
+        //     whatTodo.innerHTML = "What to do: left side exercise";
 
-        }
-        else if(tutorial_state[tutorial_state_num]=='right side exercise'){
-            whatTodo.innerHTML = "What to do: right side exercise";
+        // }
+        // else if(tutorial_state[tutorial_state_num]=='right side exercise'){
+        //     whatTodo.innerHTML = "What to do: right side exercise";
 
-        }
-        else if(tutorial_state[tutorial_state_num]=='Done'){
-            var link = 'main.html';
-            location.replace(link);
-        }
+        // }
+        // else if(tutorial_state[tutorial_state_num]=='Done'){
+        //     var link = 'main.html';
+        //     location.replace(link);
+        // }
+        whatTodo.innerHTML = "What to do:"+tutorial_state[tutorial_state_num];
+        if(tutorial_state[tutorial_state_num]=='Done'){
+                var link = 'main.html';
+                location.replace(link);
+            }
 
     }
 

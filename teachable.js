@@ -15,12 +15,16 @@
     let before_pose = 'None';
     let direction = 'None';
     let if_first_stand = false;
-    let if_second_stand = false;
     let my_pose='None';
+    let tutorial_state = ['stand','squat','jump with arms','left side exercise','right side exercise','Done'];
+    let tutorial_state_num = 0;
+    let myHtml = document.getElementsByTagName("title")[0].innerHTML;
 
 
 
     async function init() {
+        if (myHtml=='tutorial') tutorial();
+
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
@@ -70,14 +74,22 @@
         //console.log("happy");
         //console.log('count : '+count);
         before_pose=poseList[poseList.length-1];
+
+        if(myHtml=='tutorial'){
+            if (state_pose==tutorial_state[tutorial_state_num]){
+                tutorial_state_num++;
+                tutorial();
+            }
+
+        }
+
         if(count==samePoseCount){
             state_pose=poseList[poseList.length-1];
             console.log("state_pose : "+state_pose);
             count=0;
             poseList=[];
             poseChanged();
-            //var link = 'maze.html';
-            //location.replace(link);
+
         
         }
         if (poseList[poseList.length-1] == before_pose){
@@ -96,7 +108,9 @@
         else if(state_pose!='stand' && if_first_stand){
             my_pose=state_pose;
         }
+   
         else if(state_pose=='stand'){
+
             moveCharacterByPose();
             if_first_stand=false;
             my_pose='None';
@@ -123,6 +137,16 @@
             MazeGame.moveCharacter("up");
             console.log("up");
         }
+    }
+    async function tutorial(){
+        console.log("tutorial_state_num : "+tutorial_state_num);
+        //let whatTodo = document.getElementById("whatTodo");
+        whatTodo.innerHTML = "What to do:"+tutorial_state[tutorial_state_num];
+        if(tutorial_state[tutorial_state_num]=='Done'){
+                var link = 'main.html';
+                location.replace(link);
+            }
+
     }
 
 
