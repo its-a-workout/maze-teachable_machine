@@ -43,16 +43,16 @@ function Position(x, y) {
       }
     }
   
-    var mazeOutputDiv = document.createElement("div");
-    mazeOutputDiv.id = "maze_output";
+    // var mazeOutputDiv = document.createElement("div");
+    // mazeOutputDiv.id = "maze_output";
   
-    mazeOutputDiv.appendChild(this.mazeScore);
-    mazeOutputDiv.appendChild(this.mazeMessage);
+    // mazeOutputDiv.appendChild(this.mazeScore);
+    // mazeOutputDiv.appendChild(this.mazeMessage);
   
-    mazeOutputDiv.style.width = this.mazeContainer.scrollWidth + "px";
-    this.setMessage("first find the key");
+    // mazeOutputDiv.style.width = this.mazeContainer.scrollWidth + "px";
+    // this.setMessage("first find the key");
   
-    this.mazeContainer.insertAdjacentElement("afterend", mazeOutputDiv);
+    // this.mazeContainer.insertAdjacentElement("afterend", mazeOutputDiv);
 
 
    

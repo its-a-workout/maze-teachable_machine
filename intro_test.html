@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>너, 운동된 거야</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="container text-center p-5">
+      <div class="row">
+        <div class="col">
+          <h1 class="card-title">너, 운동된 거야</h1>
+        </div>
+        <div class="col">
+          <img src="/logo.png" id="logo" />
+        </div>
+        <div class="col">
+          <p class="card-text">동작을 취해 캐릭터를 움직여 미로를 탈출해보세요!</p>
+        </div>
+      </div>
+    </div>
+    <div class="input-group mb-3 p-3">
+      <span class="input-group-text">이름 안 적으면 납치한다.</span>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Username">
+        <label for="floatingInputGroup1">Username</label>
+      </div>
+    </div>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <a href="..." id="test1" onclick='return check()'>
+            <div class="card" id="test2">
+              <img src="/maze.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">난이도 상</h5>
+                <p class="card-text">미로의 두께가 넓어요</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="/maze.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">난이도 중</h5>
+              <p class="card-text">미로의 두께가 넓어요</p>
+              <a href="#" class="btn btn-primary">시작하기</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="/maze.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">난이도 하</h5>
+              <p class="card-text">미로의 두께가 넓어요</p>
+              <a href="#" class="btn btn-primary">시작하기</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="2.gif" class="card-img-top" alt="..." style="width:100%; height: 180px;">
+            <div class="card-body">
+              <h5 class="card-title">튜토리얼</h5>
+              <p class="card-text">같이 자세 연습을 해볼까요?</p>
+              <a href="#" class="btn btn-success">시작하기</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="1.gif" class="card-img-top" alt="..." style="width:100%; height: 180px;">
+            <div class="card-body">
+              <h5 class="card-title">랭킹</h5>
+              <p class="card-text">다른 사람들의 순위를 봐볼까요?</p>
+              <a href="#" class="btn btn-primary">랭킹보기</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <style>
+    #logo {
+      width: 100px;
+      border-radius: 70%;
+      margin-top: -35px;
+      animation: rotate_img 3s linear infinite;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    @keyframes rotate_img {
+      100% {
+        transform: rotate(360deg)
+      }
+    }
+    
+  </style>
+
+  <script>
+    $("#levelTB tr").click(function () {
+      const tb = document.getElementById("levelTB");
+      var td = $(this).children();
+      var level = td.text()[4];
+      if (level === "상") tb.setAttribute("selected", 10);
+      else if (level === "중") tb.setAttribute("selected", 8);
+      else if (level === "하") tb.setAttribute("selected", 7);
+    });
+    function startGame() {
+      const name = document.getElementById("nameBox").value;
+      const level = document
+        .getElementById("levelTB")
+        .getAttribute("selected");
+      if (name === "") {
+        alert("이름을 입력해주세요!");
+        location.reload();
+      }
+      else if (level === "") {
+        alert("난이도를 선택해주세요!");
+        location.reload();
+      }
+      else {
+        location.href = `/play/${level}?nickname=${name}`;
+      }
+    }
+    function goTutorial() {
+      const name = document.getElementById("nameBox").value;
+      location.href = `/tutorial/?nickname=${name}`;
+    }
+    function showRank() {
+      const name = document.getElementById("nameBox").value;
+      location.href = `/rank/?nickname=${name}`;
+    }
+    function check() {
+      alert("아직 준비중입니다!");
+    }
+    let box=document.getElementById("test1");
+    let box2=document.getElementById("test2");
+
+    box.onmouseover = function(){
+      box2.style.backgroundColor = "red";
+    };
+    box.onmouseout = function(){
+      box2.style.backgroundColor = "white";
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

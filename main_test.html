@@ -1,0 +1,97 @@
+<!-- 운동 자세 인식을 통한 미로 게임 화면 입니다. -->
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mainPage</title>
+  <link rel="stylesheet" type="text/css" href="mazing_test.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="row text-center">
+    <div class="col">
+      <h1 class="..." style="color: red;">너, 운동</h1>
+    </div>
+    <div class="col">
+      <div class="pt-5">
+        <img src="logo.png" id="logo" />
+      </div>
+    </div>
+    <div class="col">
+      <h1 class="..." style="color: red;">된 거야</h1>
+    </div>
+
+  </div>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-4">
+        <div class="card shadow">
+          <div><canvas id="canvas" class="card-img-top" style="width:100%;"></canvas></div>
+          <div class="card-body">
+            <div class="teachable">
+              <h1>00:20:20</h1>
+              <div id="label-container"></div>
+              <div>상 : 스쿼트</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <div id="maze_section" class="m-1">
+          <div id="maze_container" style="width: 100%; height: 100%;">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+  <script src="teachable.js"></script>
+
+  <script src="maze-builder.js"></script>
+  <script src="fancy-maze-builder.js"></script>
+  <script src="mazing.js"></script>
+  <script>
+
+    var Maze, MazeGame, MazeGame2;
+    Maze = new MazeBuilder(8, 8);
+    Maze.placeKey();
+    console.log(Maze);
+    Maze.display("maze_container");
+    MazeGame = new Mazing("maze");
+
+  </script>
+  <style>
+    body{
+      height: 100vh;
+      width: 100vw;
+      background-color: #979696;
+    }
+    #logo {
+      width: 100px;
+      border-radius: 70%;
+      margin-top: -35px;
+      animation: rotate_img 3s linear infinite;
+    }
+
+    @keyframes rotate_img {
+      100% {
+        transform: rotate(360deg)
+      }
+    }
+  </style>
+</body>
+
+</html>

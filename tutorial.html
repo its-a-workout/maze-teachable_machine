@@ -3,15 +3,18 @@
 <!-- 운동 자세 인식을 통한 미로 게임 화면 입니다. -->
 <h1>미로 게임</h1>
 
-<div id="teachable">
-    <div>Teachable Machine Pose Model</div>
-    <div><canvas id="canvas"></canvas></div>
-    <div id="label-container"></div>
-</div>
-<div id="image">
-    <p>튜토리얼</p>
-    <div id="whatTodo">당신이 해야할거</div>
-
+<div class="container">
+    <div id="teachable">
+        <div>Teachable Machine Pose Model</div>
+        <div><canvas id="canvas"></canvas></div>
+        <div id="label-container"></div>
+    </div>
+    <div id="image">
+        <p>튜토리얼</p>
+        <div id="whatTodo">당신이 해야할거</div>
+        <img class="myGif" src="1.gif" alt="">
+    
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
@@ -19,13 +22,23 @@
 <script src="teachable.js"></script>
     
 <style>
+    .container{
+        display: flex;
+
+    }
     #teachable {
-        float: left;
-        width: 70%;
+        width: 50%;
+        height: 100%;
+        margin: 0 auto;
+        text-align: center;
+  
     }
     #image {
-        float: right;
-        width: 30%;
+        width: 50%;
+        height: 100%;
+        margin: 0 auto;
+        text-align: center;
+      
     }
 </style>
 

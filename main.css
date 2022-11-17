@@ -18,15 +18,30 @@
   #teachable{
       border:1px solid gray;
 
-      padding: 20px;
-      flex-grow: 1;
+      width: 30%;
+        height: 100%;
+        text-align: center;
+    margin: auto;
+      
 
   }
   #maze_section{
 
       border:1px solid gray;
-      padding: 20px;
-      flex-grow: 2;
+      width: 50%;
+      height: 100%;
+      
+      text-align: center;
+        margin: auto;
 
 
+  }
+  #maze{
+      border:5px solid gray;
+    
+  }
+  #maze_container{
+      width: 100%;
+      height: 100%;
+      
   }

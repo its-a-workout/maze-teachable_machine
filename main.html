@@ -1,65 +1,60 @@
-
-<title>mainPage</title>
-
 <!-- 운동 자세 인식을 통한 미로 게임 화면 입니다. -->
-<div id="container">
-  <header>
-    <h1 id="headTitle">미로 게임</h1>
-  </header>
+<!doctype html>
+<html lang="en">
 
-  <div id="content">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mainPage</title>
+  <link rel="stylesheet" type="text/css" href="mazing.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
 
-    <div id="teachable">
-      <div>Teachable Machine Pose Model</div>
-      <div><canvas id="canvas"></canvas></div>
-      <div id="label-container"></div>
-    </div>
-    <!-- 미로 구현 -->
-    <div id="maze_section">
-      <div id="maze_container"><!-- --></div>
-      
+<body>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-4">
+        <div class="teachable">
+          <div>Teachable Machine Pose Model</div>
+          <div><canvas id="canvas" style="width:100%;"></canvas></div>
+          <div id="label-container"></div>
+        </div>
+      </div>
+      <div class="col-8">
+        <div id="maze_section" class="m-1">
+          <div id="maze_container" style="width: 100%; height: 100%;">
+            <!-- -->
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
-  <footer>
-    <p>© 2022. All rights reserved by B1A3.</p>
-  </footer>
-</div>
 
 
 
 
-<link rel="stylesheet" type="text/css" href="mazing.css">
-<link rel="stylesheet" type="text/css" href="main.css">
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
-<script src="teachable.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+  <script src="teachable.js"></script>
 
-<script src="maze-builder.js"></script>
-<script src="fancy-maze-builder.js"></script>
-<script src="mazing.js"></script>
-<script>
+  <script src="maze-builder.js"></script>
+  <script src="fancy-maze-builder.js"></script>
+  <script src="mazing.js"></script>
+  <script>
 
-  var Maze, MazeGame,MazeGame2;
-/*
-  const makeMaze = (id, width, height, speech = false) => {
-    Maze = new MazeBuilder(width, height);
-    Maze.placeKey();
-
-    Maze.display(id);
-    MazeGame = new Mazing("maze");
-    //console.log(MazeGame);
-    //if(speech) {
-    //  MazeGame.enableSpeech();
-    //}
-  }
-
-
-  makeMaze("maze_container",8, 8);
-*/
+    var Maze, MazeGame, MazeGame2;
     Maze = new MazeBuilder(8, 8);
     Maze.placeKey();
     console.log(Maze);
     Maze.display("maze_container");
     MazeGame = new Mazing("maze");
 
-</script>
+  </script>
+</body>
+
+</html>

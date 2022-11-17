@@ -17,8 +17,10 @@
     let if_first_stand = false;
     let my_pose='None';
     let tutorial_state = ['stand','squat','jump with arms','left side exercise','right side exercise','Done'];
+    let tutorial_gif = ['1.gif','2.gif','3.gif','4.gif','5.gif'];
     let tutorial_state_num = 0;
     let myHtml = document.getElementsByTagName("title")[0].innerHTML;
+    let myGif = document.getElementsByClassName("myGif")[0];
 
 
 
@@ -142,6 +144,11 @@
         console.log("tutorial_state_num : "+tutorial_state_num);
         //let whatTodo = document.getElementById("whatTodo");
         whatTodo.innerHTML = "What to do:"+tutorial_state[tutorial_state_num];
+        //myGif="2.gif";
+        console.log(myGif);
+        myGif.src=tutorial_gif[tutorial_state_num];
+        console.log(myGif);
+    
         if(tutorial_state[tutorial_state_num]=='Done'){
                 var link = 'main.html';
                 location.replace(link);

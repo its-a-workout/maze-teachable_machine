@@ -15,7 +15,7 @@
   /* 여기 수정하면 공간이 늘어남 */
   #maze div div {
     position: relative;
-    /* flex-grow: 1; */
+    flex-grow: 1;
       width: 2rem;
       height: 2rem;
   }
@@ -78,14 +78,14 @@
   }
   /* 블럭 사이즈 조절 */
   #maze div div:nth-child(odd) {
-    /* flex-grow: 1; */
+    flex-grow: 1;
 
-    width: 2rem;
+    /* width: 2rem; */
   }
   #maze div:nth-child(odd) div {
-    /* flex-grow: 1; */
+    flex-grow: 1;
 
-    height: 2rem;
+    /* height: 2rem; */
   }
   
   #maze.finished::after {
