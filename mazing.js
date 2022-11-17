@@ -22,8 +22,8 @@ function Position(x, y) {
     this.mazeMessage = document.createElement("div");
     this.mazeMessage.id = "maze_message";
   
-    this.heroScore = this.mazeContainer.getAttribute("data-steps") - 2;
-  
+    // this.heroScore = this.mazeContainer.getAttribute("data-steps") - 2;
+    this.heroScore = 9999;
     this.maze = [];
     this.heroPos = {};
     this.heroHasKey = false;
