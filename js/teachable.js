@@ -233,6 +233,12 @@ async function predict() {
         } else {
             gsap.to(progressBar[i], {
                 x: `${state}%`,
+                backgroundColor: '#e76f51',
+                onComplete: () => {
+
+                    progressBarContainer[i].style.boxShadow = '0 0 5px #e76f51';
+                }
+
                 //duration: 2,
             });
         }
