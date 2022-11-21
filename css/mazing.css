@@ -4,12 +4,13 @@
   }
   #maze {
     position: relative;
-    background-image: url('madongsuk.jpg');
+    background-image: url('../image/madongsuk.jpg');
     background-repeat : no-repeat;
     background-size : cover;
   }
   #maze div {
     display: flex;
+    /* height: 1rem; */
   }
 
   /* 여기 수정하면 공간이 늘어남 */
@@ -30,7 +31,7 @@
     z-index: 10;
   }
   #maze div div.door.exit::after {
-    background-image: url('강해상.jpg');
+    background-image: url('../image/강해상.jpg');
     background-size: 3rem 3rem;
     display: inline-block;
     width: 2.5rem; 
@@ -56,7 +57,7 @@
   }
   #maze div.hero::after {
     /* content: "\1F6B6" !important; */
-    background-image: url('madongsuk2.png');
+    background-image: url('../image/madongsuk2.png');
     background-size: 2.5rem 2.5rem;
     display: inline-block;
     width: 2.5rem; 

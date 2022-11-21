@@ -1,0 +1,160 @@
+<!-- 운동 자세 인식을 통한 미로 게임 화면 입니다. -->
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>tutorial</title>
+  <link rel="stylesheet" type="text/css" href="../css/mazing.css">
+  <link rel="stylesheet" type="text/css" href="../css/bar.css">
+  <link rel="stylesheet" type="text/css" href="../css/carousel.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="row text-center">
+    <div class="col">
+      <h1 class="..." style="color: red;">너, 운동</h1>
+    </div>
+    <div class="col">
+      <div class="pt-5">
+        <img src="../image/logo.png" id="logo" />
+      </div>
+    </div>
+    <div class="col">
+      <h1 class="..." style="color: red;">된 거야</h1>
+    </div>
+
+  </div>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-3">
+        <div class="card shadow">
+          <div><canvas id="canvas" class="card-img-top" style="width:100%;"></canvas></div>
+          <div class="card-body">
+            <div class="teachable">
+              <div>배경화면</div>
+              <div id="label-container"></div>
+              <div class="progress-bar__container">
+                <div class="progress-bar"></div>
+              </div>
+              <div>서있기</div>
+              <div class="progress-bar__container">
+                <div class="progress-bar"></div>
+              </div>
+              <div>스쿼트</div>
+              <div class="progress-bar__container">
+                <div class="progress-bar"></div>
+              </div>
+              <div>팔 벌려 뛰기</div>
+              <div class="progress-bar__container">
+                <div class="progress-bar"></div>
+              </div>
+              <div>왼쪽</div>
+              <div class="progress-bar__container">
+                <div class="progress-bar"></div>
+              </div>
+              <div>오른쪽</div>
+              <div class="progress-bar__container">
+                <div class="progress-bar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-9">
+        <!-- <div id="image" style="width: 100%; height:100%" >
+            <img class="myGif" src="1.gif" style="width: 100%; height:100%">
+        </div> -->
+        <div class="container-carousel">
+          <input type="radio" name="slider" id="item-1" checked>
+          <input type="radio" name="slider" id="item-2">
+          <input type="radio" name="slider" id="item-3">
+          <input type="radio" name="slider" id="item-4">
+          <input type="radio" name="slider" id="item-5">
+
+          <div class="cards">
+            <label class="card-carousel" for="item-1" id="song-1">
+              <img src="../image/1.gif">
+            </label>
+            <label class="card-carousel" for="item-2" id="song-2">
+              <img src="../image/2.gif">
+
+            </label>
+            <label class="card-carousel" for="item-3" id="song-3">
+              <img src="../image/3.gif">
+            </label>
+            <label class="card-carousel" for="item-4" id="song-4">
+              <img src="../image/4.gif">
+            </label>
+            <label class="card-carousel" for="item-5" id="song-5">
+              <img src="../image/5.gif">
+            </label>
+          </div>
+          <div class="player">
+              <div class="upper-part">
+                  <div class="info-area" id="test">
+                      <label class="song-info" id="song-info-1">
+                          <div class="title">가만히 서 있으세요</div>
+                      </label>
+                      <label class="song-info" id="song-info-2">
+                        <div class="title">스쿼트 하세요</div>
+                      </label>
+                      <label class="song-info" id="song-info-3">
+                        <div class="title">팔 벌려 뛰기를 하세요</div>
+                      </label>
+                      <label class="song-info" id="song-info-4">
+                        <div class="title">왼쪽으로 하세요</div>
+                      </label>
+                      <label class="song-info" id="song-info-5">
+                        <div class="title">오른쪽으로 하세요</div>
+                      </label>
+                  </div>
+              </div>
+      
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+  <script src="../js/teachable.js"></script>
+
+  <style>
+    body {
+      height: 100vh;
+      width: 100vw;
+      background-image: url("../image/bck4.jpg");
+      background-size: cover;
+    }
+
+    #logo {
+      width: 100px;
+      border-radius: 70%;
+      margin-top: -35px;
+      animation: rotate_img 3s linear infinite;
+    }
+
+    @keyframes rotate_img {
+      100% {
+        transform: rotate(360deg)
+      }
+    }
+  </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+
+</body>
+
+</html>

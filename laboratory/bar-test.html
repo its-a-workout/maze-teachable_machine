@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="progress-bar__container">
+        <div class="progress-bar"></div>
+    </div>
+    <div class="progress-bar__container">
+        <div class="progress-bar"></div>
+    </div>
+    <div class="progress-bar__container">
+        <div class="progress-bar"></div>
+    </div>
+    <div class="progress-bar__container">
+        <div class="progress-bar"></div>
+    </div>
+    <div class="progress-bar__container">
+        <div class="progress-bar"></div>
+    </div>
+    <div class="progress-bar__container">
+        <div class="progress-bar"></div>
+    </div>
+</div>
+<style>
+    .progress-bar__container {
+        margin: 10px;
+        width: 80%;
+        height: 2rem;
+        border-radius: 2rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.01s;
+        will-change: transform;
+        box-shadow: 0 0 5px #e76f51;
+    }
+
+    .progress-bar {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        content: "";
+        background-color: #e76f51;
+        top: 0;
+        bottom: 0;
+        left: -100%;
+        border-radius: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: sans-serif;
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+
+<script>
+    
+    const progressBarContainer = document.querySelectorAll('.progress-bar__container');
+    const progressBar = document.querySelectorAll('.progress-bar');
+
+
+    let time = 0;
+    let endState = 90;
+    let state=30;
+
+    if (state >endState) {
+        gsap.to(progressBar, {
+            x: `${state}%`,
+            //duration: 2,
+            backgroundColor: '#4895ef',
+            onComplete: () => {
+                
+                progressBarContainer.style.boxShadow = '0 0 5px #4895ef';
+            }
+        });
+    } else {
+        gsap.to(progressBar, {
+            x: `${state}%`,
+            //duration: 2,
+        });
+    }
+    
+</script>
