@@ -18,19 +18,31 @@ let before_pose = 'None';
 let direction = 'None';
 let if_first_stand = false;
 let my_pose = 'None';
-let tutorial_state = ['stand', 'squat', 'jump with arms', 'left side exercise', 'right side exercise', 'Done'];
-let tutorial_gif = ['1.gif', '2.gif', '3.gif', '4.gif', '5.gif'];
-let tutorial_state_num = 0;
-let myHtml = document.getElementsByTagName("title")[0].innerHTML;
-let myGif = document.getElementsByClassName("myGif")[0];
-var startTime = new Date().getTime();
+let radio_exercise_dict = {
+    'item-1': 'stand',
+    'item-2': 'squat',
+    'item-3': 'jump with arms',
+    'item-4': 'left side exercise',
+    'item-5': 'right side exercise',
+};
+let radio_id_dict = {
+    'item-1': 0,
+    'item-2': 1,
+    'item-3': 2,
+    'item-4': 3,
+    'item-5': 4,
 
-let time=document.getElementsByClassName("time")[0];
+};
+let myHtml = document.getElementsByTagName("title")[0].innerHTML;
+var startTime = new Date().getTime();
+var timeScore = 0;
+
+let time = document.getElementsByClassName("time")[0];
 
 
 
 async function init() {
-    if (myHtml == 'tutorial') tutorial();
+    // if (myHtml == 'tutorial') tutorial();
 
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
@@ -65,8 +77,10 @@ async function loop(timestamp) {
     webcam.update(); // update the webcam frame
     await predict();
     window.requestAnimationFrame(loop);
-    checkTime();
+    if (myHtml == 'mainPage') checkTime();
+
     
+
 }
 
 // delay 함수 (일단은 사용하지 않음)
@@ -84,9 +98,20 @@ async function pose_state() {
     before_pose = poseList[poseList.length - 1];
 
     if (myHtml == 'tutorial') {
-        if (state_pose == tutorial_state[tutorial_state_num]) {
-            tutorial_state_num++;
-            tutorial();
+        radio_state = document.querySelector('input[name="slider"]:checked').id;
+        slider = document.getElementsByName('slider');
+        i = radio_id_dict[radio_state];
+
+        // console.log("rs"+radio_state);
+        // console.log("sta",state_pose, radio_exercise_dict[radio_state]);
+
+        if (state_pose == radio_exercise_dict[radio_state]) {
+            i++;
+            // console.log("i sklahflkjashfajkshlhj: " + i);
+            i=i%slider.length;
+            slider[i].checked = true;
+            
+
         }
 
     }
@@ -146,29 +171,29 @@ async function moveCharacterByPose() {
         console.log("up");
     }
 }
-async function tutorial() {
-    console.log("tutorial_state_num : " + tutorial_state_num);
-    //let whatTodo = document.getElementById("whatTodo");
-    whatTodo.innerHTML = "What to do:" + tutorial_state[tutorial_state_num];
-    //myGif="2.gif";
-    console.log(myGif);
-    myGif.src = tutorial_gif[tutorial_state_num];
-    console.log(myGif);
+// async function tutorial() {
+//     console.log("tutorial_state_num : " + tutorial_state_num);
+//     //let whatTodo = document.getElementById("whatTodo");
+//     whatTodo.innerHTML = "What to do:" + tutorial_state[tutorial_state_num];
+//     //myGif="2.gif";
+//     console.log(myGif);
+//     myGif.src = tutorial_gif[tutorial_state_num];
+//     console.log(myGif);
 
-    if (tutorial_state[tutorial_state_num] == 'Done') {
-        var link = 'main.html';
-        location.replace(link);
-    }
+//     if (tutorial_state[tutorial_state_num] == 'Done') {
+//         var link = 'main.html';
+//         location.replace(link);
+//     }
 
-}
-function checkTime(){
+// }
+function checkTime() {
     var nowTime = new Date().getTime()	//1ms당 한 번씩 현재시간 timestamp를 불러와 nowTime에 저장
     var newTime = new Date(nowTime - startTime)	//(nowTime - stTime)을 new Date()에 넣는다
     var min = newTime.getMinutes()	//분
     var sec = newTime.getSeconds()	//초
     if (min < 10) min = "0" + min
     if (sec < 10) sec = "0" + sec
-    console.log(min + ":" + sec)
+    //console.log(min + ":" + sec)
     time.innerHTML = min + ":" + sec
 }
 
@@ -183,6 +208,8 @@ async function predict() {
 
 
     for (let i = 0; i < maxPredictions; i++) {
+       
+
         // const classPrediction =
         //     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
         //posePredictPecent 이상의 확률을 가진 포즈만 poseList에 저장
