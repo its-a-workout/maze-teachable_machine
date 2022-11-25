@@ -5,8 +5,8 @@
 
 
 const URL = "./my_model_pose/";
-const samePoseCount = 5; //같은 포즈가 몇번이상 나오면 포즈가 바뀐것으로 간주할지 결정하는 변수
-const posePredictPecent = 0.7; //포즈 확률이 몇퍼센트 이상이면 해당 포즈로 간주할지 결정하는 변수
+const samePoseCount = 10; //같은 포즈가 몇번이상 나오면 포즈가 바뀐것으로 간주할지 결정하는 변수
+const posePredictPecent = 0.75; //포즈 확률이 몇퍼센트 이상이면 해당 포즈로 간주할지 결정하는 변수
 const progressBarContainer = document.querySelectorAll('.progress-bar__container');
 const progressBar = document.querySelectorAll('.progress-bar');
 
@@ -15,24 +15,9 @@ let poseList = []; //posePredictPecent 이상의 확률을 가진 포즈만 pose
 let state_pose = 'None';
 let count = 0;
 let before_pose = 'None';
-let direction = 'None';
 let if_first_stand = false;
+let if_myPose = false;
 let my_pose = 'None';
-let radio_exercise_dict = {
-    'item-1': 'stand',
-    'item-2': 'squat',
-    'item-3': 'jump with arms',
-    'item-4': 'left side exercise',
-    'item-5': 'right side exercise',
-};
-let radio_id_dict = {
-    'item-1': 0,
-    'item-2': 1,
-    'item-3': 2,
-    'item-4': 3,
-    'item-5': 4,
-
-};
 let myHtml = document.getElementsByTagName("title")[0].innerHTML;
 var startTime = new Date().getTime();
 var timeScore = 0;
@@ -66,10 +51,10 @@ async function init() {
     const canvas = document.getElementById("canvas");
     canvas.width = size; canvas.height = size;
     ctx = canvas.getContext("2d");
-    labelContainer = document.getElementById("label-container");
-    for (let i = 0; i < maxPredictions; i++) { // and class labels
-        labelContainer.appendChild(document.createElement("div"));
-    }
+    // labelContainer = document.getElementById("label-container");
+    // for (let i = 0; i < maxPredictions; i++) { // and class labels
+    //     labelContainer.appendChild(document.createElement("div"));
+    // }
 }
 
 async function loop(timestamp) {
@@ -92,26 +77,37 @@ function delay(milliseconds) {
 
 //포즈 모델의 결과값들을 통해 같은값이 samePoseCount번이상 나오면 state_pose에 저장
 async function pose_state() {
+    
 
     //console.log("happy");
     //console.log('count : '+count);
     before_pose = poseList[poseList.length - 1];
 
+    //만약 해당 페이지가 튜토리얼 페이지라면
     if (myHtml == 'tutorial') {
+        let radio_exercise_dict = {
+            'item-1': 'stand',
+            'item-2': 'squat',
+            'item-3': 'jump with arms',
+            'item-4': 'right side exercise',
+            'item-5': 'left side exercise',
+        };
+        let radio_id_dict = {
+            'item-1': 0,
+            'item-2': 1,
+            'item-3': 2,
+            'item-4': 3,
+            'item-5': 4,
+        
+        };
         radio_state = document.querySelector('input[name="slider"]:checked').id;
         slider = document.getElementsByName('slider');
         i = radio_id_dict[radio_state];
-
-        // console.log("rs"+radio_state);
-        // console.log("sta",state_pose, radio_exercise_dict[radio_state]);
-
+        //포즈가 튜토리얼 페이지에서 보여주는 포즈와 같다면
         if (state_pose == radio_exercise_dict[radio_state]) {
             i++;
-            // console.log("i sklahflkjashfajkshlhj: " + i);
             i=i%slider.length;
             slider[i].checked = true;
-            
-
         }
 
     }
@@ -136,16 +132,21 @@ async function pose_state() {
 async function poseChanged() {
 
     if (state_pose == 'stand' && !if_first_stand) {
+        console.log("stand!!!!!!!!");
         if_first_stand = true;
     }
     else if (state_pose != 'stand' && if_first_stand) {
         my_pose = state_pose;
+        if_myPose = true;
+        console.log("my_pose : " + my_pose+if_first_stand);
     }
 
-    else if (state_pose == 'stand') {
+    else if (state_pose == 'stand' && if_first_stand && if_myPose) {
+        console.log("stan111!!!!!");
 
         moveCharacterByPose();
         if_first_stand = false;
+        if_myPose = false;
         my_pose = 'None';
     }
 
@@ -156,19 +157,19 @@ async function poseChanged() {
 async function moveCharacterByPose() {
     if (my_pose == 'squat') {
         MazeGame.moveCharacter("down");
-        console.log("down");
+        console.log("!!!!character move down!!!!");
     }
     else if (my_pose == 'right side exercise') {
         MazeGame.moveCharacter("right");
-        console.log("right");
+        console.log("!!!!character move right!!!!");
     }
     else if (my_pose == 'left side exercise') {
         MazeGame.moveCharacter("left");
-        console.log("left");
+        console.log("!!!!character move left!!!!");
     }
     else if (my_pose == 'jump with arms') {
         MazeGame.moveCharacter("up");
-        console.log("up");
+        console.log("!!!!character move up!!!!");
     }
 }
 // async function tutorial() {
@@ -220,7 +221,7 @@ async function predict() {
         }
         let state = prediction[i].probability.toFixed(2) * 100;
 
-        if (state > 80) {
+        if (state > posePredictPecent * 100) {
             gsap.to(progressBar[i], {
                 x: `${state}%`,
                 //duration: 2,
